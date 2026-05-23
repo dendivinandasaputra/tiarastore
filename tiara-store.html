@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tiara Store — Pulsa & Paket Data</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #f9c74f;
+    --gold-dark: #e6a800;
+    --purple: #2d0060;
+    --purple-mid: #5b21b6;
+    --purple-light: #a78bfa;
+    --teal: #0d9488;
+    --teal-light: #5eead4;
+    --dark: #0a0015;
+    --dark2: #130026;
+    --dark3: #1e0042;
+    --text: #f1f0ff;
+    --muted: #94a3b8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 2.5rem;
+    border-bottom: 1px solid rgba(167,139,250,0.15);
+    background: rgba(10,0,21,0.9);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .crown-small {
+    width: 28px;
+    height: 22px;
+  }
+
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #fff;
+  }
+
+  .nav-brand span { color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-wa {
+    background: var(--teal);
+    color: #fff !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    font-weight: 500 !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-wa:hover { background: #0f766e !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.35;
+  }
+
+  .orb1 { width: 500px; height: 500px; background: #3b0080; top: -100px; left: -150px; }
+  .orb2 { width: 400px; height: 400px; background: #0a4a40; bottom: -80px; right: -100px; }
+  .orb3 { width: 300px; height: 300px; background: #5b21b6; top: 40%; left: 50%; transform: translate(-50%,-50%); opacity: 0.2; }
+
+  .grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(167,139,250,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(167,139,250,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(167,139,250,0.12);
+    border: 1px solid rgba(167,139,250,0.25);
+    border-radius: 50px;
+    padding: 0.4rem 1.2rem;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    color: var(--purple-light);
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--teal-light);
+    animation: pulse-dot 2s infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .crown-logo {
+    margin: 0 auto 1.5rem;
+    display: block;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 10vw, 6rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -1px;
+    margin-bottom: 0.3rem;
+  }
+
+  .hero h1 .gold { color: var(--gold); }
+
+  .hero-sub {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    font-weight: 700;
+    color: var(--purple-light);
+    letter-spacing: 8px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-desc {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.8;
+    max-width: 500px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gold);
+    color: #1a0533;
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: transform 0.2s, background 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover { transform: translateY(-2px); background: var(--gold-dark); }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--text);
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    font-weight: 400;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+
+  .btn-outline:hover { border-color: var(--purple-light); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 3.5rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(167,139,250,0.12);
+    flex-wrap: wrap;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+
+  /* SECTION */
+  section {
+    padding: 5rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    color: var(--teal-light);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .section-title span { color: var(--gold); }
+
+  .section-desc {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.8;
+    max-width: 500px;
+    margin-bottom: 3rem;
+  }
+
+  /* PRODUCTS */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .product-card {
+    background: var(--dark2);
+    border: 1px solid rgba(167,139,250,0.12);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+
+  .product-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(167,139,250,0.35);
+  }
+
+  .product-header {
+    padding: 1.5rem 1.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(167,139,250,0.08);
+  }
+
+  .product-icon {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+  }
+
+  .icon-purple { background: rgba(91,33,182,0.25); border: 1px solid rgba(167,139,250,0.2); }
+  .icon-teal   { background: rgba(13,148,136,0.2);  border: 1px solid rgba(94,234,212,0.2); }
+
+  .product-title { font-size: 1.1rem; font-weight: 500; }
+  .product-subtitle { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+  .price-list { padding: 1rem 1.5rem; }
+
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.9rem;
+  }
+
+  .price-row:last-child { border-bottom: none; }
+  .price-name { color: var(--muted); }
+  .price-val { font-weight: 500; color: var(--gold); }
+
+  .product-footer {
+    padding: 1rem 1.5rem 1.5rem;
+  }
+
+  .order-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: transform 0.2s, opacity 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .order-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+  .btn-purple { background: var(--purple-mid); color: #fff; }
+  .btn-teal   { background: var(--teal); color: #fff; }
+
+  /* OPERATORS */
+  .operators-section {
+    padding: 3rem 2rem;
+    background: var(--dark2);
+    border-top: 1px solid rgba(167,139,250,0.08);
+    border-bottom: 1px solid rgba(167,139,250,0.08);
+  }
+
+  .operators-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .operators-label {
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .ops-grid {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .op-pill {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 50px;
+    padding: 0.5rem 1.4rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: border-color 0.2s, background 0.2s;
+    cursor: default;
+  }
+
+  .op-pill:hover {
+    border-color: rgba(167,139,250,0.35);
+    background: rgba(167,139,250,0.07);
+  }
+
+  /* FEATURES */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .feature-card {
+    background: var(--dark2);
+    border: 1px solid rgba(167,139,250,0.1);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: border-color 0.3s;
+  }
+
+  .feature-card:hover { border-color: rgba(167,139,250,0.3); }
+
+  .feature-icon {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .feature-title {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+  }
+
+  .feature-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* HOW TO ORDER */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    counter-reset: step;
+  }
+
+  .step-card {
+    position: relative;
+    background: var(--dark2);
+    border: 1px solid rgba(167,139,250,0.1);
+    border-radius: 16px;
+    padding: 1.5rem 1.5rem 1.5rem 2.5rem;
+  }
+
+  .step-num {
+    position: absolute;
+    top: 1.5rem; left: 1.5rem;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--purple-mid);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .step-title {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+    padding-left: 1.5rem;
+  }
+
+  .step-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.7;
+    padding-left: 1.5rem;
+  }
+
+  /* CTA */
+  .cta-section {
+    padding: 5rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-box {
+    background: linear-gradient(135deg, #1e0042 0%, #022c22 100%);
+    border: 1px solid rgba(167,139,250,0.2);
+    border-radius: 28px;
+    padding: 4rem 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-glow {
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .cta-glow1 { background: #5b21b6; top: -80px; left: -60px; }
+  .cta-glow2 { background: #0a4a40; bottom: -80px; right: -60px; }
+
+  .cta-box h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    position: relative;
+  }
+
+  .cta-box p {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  .wa-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.5rem;
+    position: relative;
+  }
+
+  .wa-label {
+    font-size: 0.8rem;
+    color: var(--teal-light);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    position: relative;
+    display: block;
+  }
+
+  .wa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #25d366;
+    color: #fff;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: transform 0.2s, background 0.2s;
+    position: relative;
+  }
+
+  .wa-btn:hover { transform: translateY(-3px); background: #1ebe5b; }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark2);
+    border-top: 1px solid rgba(167,139,250,0.1);
+    padding: 2rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .footer-brand span { color: var(--gold); }
+
+  .footer-copy {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  /* SCROLL ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    nav { padding: 1rem 1.2rem; }
+    .nav-links { display: none; }
+    section { padding: 3rem 1.2rem; }
+    .hero-stats { gap: 2rem; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg class="crown-small" viewBox="0 0 56 44" fill="none">
+      <rect x="3" y="22" width="50" height="16" rx="4" fill="#f9c74f"/>
+      <polygon points="3,22 3,6 16,18 28,4 40,18 53,6 53,22" fill="#f9c74f"/>
+      <circle cx="3" cy="6" r="4" fill="#fbbf24"/>
+      <circle cx="28" cy="4" r="5" fill="#fbbf24"/>
+      <circle cx="53" cy="6" r="4" fill="#fbbf24"/>
+      <rect x="3" y="36" width="50" height="5" rx="2.5" fill="#e6a800" opacity="0.6"/>
+      <circle cx="16" cy="30" r="2.5" fill="#e6a800"/>
+      <circle cx="28" cy="30" r="2.5" fill="#e6a800"/>
+      <circle cx="40" cy="30" r="2.5" fill="#e6a800"/>
+    </svg>
+    <span class="nav-brand">Tiara <span>Store</span></span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#produk">Produk</a></li>
+    <li><a href="#cara-order">Cara Order</a></li>
+    <li><a href="#kontak">Kontak</a></li>
+    <li><a href="https://wa.me/6282287119507" class="nav-wa">WhatsApp</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+    <div class="grid-lines"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">Terpercaya & Terjangkau</div>
+
+    <svg class="crown-logo" width="80" height="64" viewBox="0 0 80 64" fill="none">
+      <rect x="4" y="32" width="72" height="22" rx="6" fill="#f9c74f"/>
+      <polygon points="4,32 4,8 22,26 40,6 58,26 76,8 76,32" fill="#f9c74f"/>
+      <circle cx="4" cy="8" r="6" fill="#fbbf24"/>
+      <circle cx="40" cy="5" r="7" fill="#fbbf24"/>
+      <circle cx="76" cy="8" r="6" fill="#fbbf24"/>
+      <circle cx="4" cy="8" r="3" fill="#f59e0b"/>
+      <circle cx="40" cy="5" r="3.5" fill="#f59e0b"/>
+      <circle cx="76" cy="8" r="3" fill="#f59e0b"/>
+      <rect x="4" y="51" width="72" height="7" rx="3.5" fill="#e6a800" opacity="0.5"/>
+      <circle cx="22" cy="42" r="3.5" fill="#e6a800"/>
+      <circle cx="40" cy="42" r="3.5" fill="#e6a800"/>
+      <circle cx="58" cy="42" r="3.5" fill="#e6a800"/>
+    </svg>
+
+    <h1>TIARA<br><span class="gold">STORE</span></h1>
+    <p class="hero-sub">Pulsa &amp; Paket Data</p>
+    <p class="hero-desc">Isi pulsa dan beli paket data semua operator dengan harga terjangkau. Proses cepat, transaksi aman, layanan 24 jam.</p>
+    <div class="hero-btns">
+      <a href="https://wa.me/6282287119507?text=Halo%20Tiara%20Store,%20saya%20mau%20beli%20pulsa" class="btn-primary">
+        &#128241; Order via WhatsApp
+      </a>
+      <a href="#produk" class="btn-outline">Lihat Produk</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">6+</div>
+        <div class="stat-label">Operator tersedia</div>
+      </div>
+      <div>
+        <div class="stat-num">24H</div>
+        <div class="stat-label">Layanan setiap hari</div>
+      </div>
+      <div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Transaksi aman</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OPERATORS -->
+<div class="operators-section">
+  <div class="operators-inner">
+    <p class="operators-label">Operator yang tersedia</p>
+    <div class="ops-grid">
+      <div class="op-pill">Telkomsel</div>
+      <div class="op-pill">XL Axiata</div>
+      <div class="op-pill">Indosat Ooredoo</div>
+      <div class="op-pill">Tri (3)</div>
+      <div class="op-pill">Smartfren</div>
+      <div class="op-pill">Axis</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section id="produk">
+  <p class="section-label fade-up">Produk Kami</p>
+  <h2 class="section-title fade-up">Pulsa &amp; Data<br><span>Lengkap & Murah</span></h2>
+  <p class="section-desc fade-up">Semua nominal tersedia. Harga bersaing, proses instan.</p>
+
+  <div class="products-grid">
+
+    <div class="product-card fade-up">
+      <div class="product-header">
+        <div class="product-icon icon-purple">&#128246;</div>
+        <div>
+          <div class="product-title">Pulsa Reguler</div>
+          <div class="product-subtitle">Semua operator · Langsung aktif</div>
+        </div>
+      </div>
+      <div class="price-list">
+        <div class="price-row"><span class="price-name">Pulsa 5.000</span><span class="price-val">Rp 6.000</span></div>
+        <div class="price-row"><span class="price-name">Pulsa 10.000</span><span class="price-val">Rp 11.000</span></div>
+        <div class="price-row"><span class="price-name">Pulsa 20.000</span><span class="price-val">Rp 21.000</span></div>
+        <div class="price-row"><span class="price-name">Pulsa 50.000</span><span class="price-val">Rp 51.500</span></div>
+        <div class="price-row"><span class="price-name">Pulsa 100.000</span><span class="price-val">Rp 102.000</span></div>
+      </div>
+      <div class="product-footer">
+        <a href="https://wa.me/6282287119507?text=Halo%20Tiara%20Store,%20saya%20mau%20beli%20pulsa" class="order-btn btn-purple">Order Sekarang</a>
+      </div>
+    </div>
+
+    <div class="product-card fade-up">
+      <div class="product-header">
+        <div class="product-icon icon-teal">&#127758;</div>
+        <div>
+          <div class="product-title">Paket Data</div>
+          <div class="product-subtitle">Internet · Sosmed · Streaming</div>
+        </div>
+      </div>
+      <div class="price-list">
+        <div class="price-row"><span class="price-name">1 GB / 7 hari</span><span class="price-val">Rp 12.000</span></div>
+        <div class="price-row"><span class="price-name">2 GB / 30 hari</span><span class="price-val">Rp 20.000</span></div>
+        <div class="price-row"><span class="price-name">5 GB / 30 hari</span><span class="price-val">Rp 40.000</span></div>
+        <div class="price-row"><span class="price-name">10 GB / 30 hari</span><span class="price-val">Rp 70.000</span></div>
+        <div class="price-row"><span class="price-name">20 GB / 30 hari</span><span class="price-val">Rp 120.000</span></div>
+      </div>
+      <div class="product-footer">
+        <a href="https://wa.me/6282287119507?text=Halo%20Tiara%20Store,%20saya%20mau%20beli%20paket%20data" class="order-btn btn-teal">Order Sekarang</a>
+      </div>
+    </div>
+
+    <div class="product-card fade-up">
+      <div class="product-header">
+        <div class="product-icon icon-purple">&#128203;</div>
+        <div>
+          <div class="product-title">Paket Sosial Media</div>
+          <div class="product-subtitle">WhatsApp · TikTok · Instagram</div>
+        </div>
+      </div>
+      <div class="price-list">
+        <div class="price-row"><span class="price-name">WhatsApp 30 hari</span><span class="price-val">Rp 10.000</span></div>
+        <div class="price-row"><span class="price-name">TikTok 10 GB</span><span class="price-val">Rp 25.000</span></div>
+        <div class="price-row"><span class="price-name">Instagram 5 GB</span><span class="price-val">Rp 20.000</span></div>
+        <div class="price-row"><span class="price-name">YouTube 10 GB</span><span class="price-val">Rp 30.000</span></div>
+        <div class="price-row"><span class="price-name">Combo Sosmed</span><span class="price-val">Rp 45.000</span></div>
+      </div>
+      <div class="product-footer">
+        <a href="https://wa.me/6282287119507?text=Halo%20Tiara%20Store,%20saya%20mau%20beli%20paket%20sosmed" class="order-btn btn-purple">Order Sekarang</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section>
+  <p class="section-label fade-up">Keunggulan</p>
+  <h2 class="section-title fade-up">Kenapa <span>Tiara Store?</span></h2>
+  <div class="features-grid">
+    <div class="feature-card fade-up">
+      <span class="feature-icon">&#9889;</span>
+      <div class="feature-title">Proses Kilat</div>
+      <p class="feature-desc">Transaksi diproses langsung, pulsa masuk dalam hitungan detik.</p>
+    </div>
+    <div class="feature-card fade-up">
+      <span class="feature-icon">&#128274;</span>
+      <div class="feature-title">100% Aman</div>
+      <p class="feature-desc">Sistem terpercaya, setiap transaksi dijamin berhasil.</p>
+    </div>
+    <div class="feature-card fade-up">
+      <span class="feature-icon">&#127381;</span>
+      <div class="feature-title">Harga Bersaing</div>
+      <p class="feature-desc">Harga terjangkau untuk semua kalangan, tidak ada biaya tersembunyi.</p>
+    </div>
+    <div class="feature-card fade-up">
+      <span class="feature-icon">&#128222;</span>
+      <div class="feature-title">Layanan 24 Jam</div>
+      <p class="feature-desc">Kami siap melayani kapan saja, pagi, siang, malam, dan hari libur.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO ORDER -->
+<section id="cara-order">
+  <p class="section-label fade-up">Cara Order</p>
+  <h2 class="section-title fade-up">Mudah &amp; <span>Cepat</span></h2>
+  <p class="section-desc fade-up">Cukup 3 langkah, pulsa langsung masuk ke nomormu.</p>
+  <div class="steps">
+    <div class="step-card fade-up">
+      <div class="step-num">1</div>
+      <div class="step-title">Pilih Produk</div>
+      <p class="step-desc">Pilih jenis pulsa atau paket data yang kamu inginkan beserta nominalnya.</p>
+    </div>
+    <div class="step-card fade-up">
+      <div class="step-num">2</div>
+      <div class="step-title">Chat WhatsApp</div>
+      <p class="step-desc">Hubungi kami via WhatsApp. Beritahu nomor tujuan dan nominal yang dipilih.</p>
+    </div>
+    <div class="step-card fade-up">
+      <div class="step-num">3</div>
+      <div class="step-title">Transfer &amp; Selesai</div>
+      <p class="step-desc">Lakukan pembayaran sesuai harga. Pulsa langsung dikirim setelah konfirmasi.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section" id="kontak">
+  <div class="cta-box">
+    <div class="cta-glow cta-glow1"></div>
+    <div class="cta-glow cta-glow2"></div>
+    <svg style="margin:0 auto 1.5rem;display:block;" width="60" height="48" viewBox="0 0 80 64" fill="none">
+      <rect x="4" y="32" width="72" height="22" rx="6" fill="#f9c74f"/>
+      <polygon points="4,32 4,8 22,26 40,6 58,26 76,8 76,32" fill="#f9c74f"/>
+      <circle cx="4" cy="8" r="6" fill="#fbbf24"/>
+      <circle cx="40" cy="5" r="7" fill="#fbbf24"/>
+      <circle cx="76" cy="8" r="6" fill="#fbbf24"/>
+      <rect x="4" y="51" width="72" height="7" rx="3.5" fill="#e6a800" opacity="0.5"/>
+      <circle cx="22" cy="42" r="3.5" fill="#e6a800"/>
+      <circle cx="40" cy="42" r="3.5" fill="#e6a800"/>
+      <circle cx="58" cy="42" r="3.5" fill="#e6a800"/>
+    </svg>
+    <h2>Siap Order Sekarang?</h2>
+    <p>Hubungi kami langsung via WhatsApp. Kami siap melayani 24 jam setiap hari tanpa hari libur.</p>
+    <span class="wa-number">0822-8711-9507</span>
+    <span class="wa-label">WhatsApp / Telepon</span>
+    <a href="https://wa.me/6282287119507?text=Halo%20Tiara%20Store,%20saya%20mau%20order%20pulsa" class="wa-btn">
+      &#128241; Chat WhatsApp Sekarang
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Tiara <span>Store</span></div>
+  <div class="footer-copy">Solusi pulsa &amp; paket data terlengkap · Palembang</div>
+  <div class="footer-copy">&#169; 2025 Tiara Store</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>
